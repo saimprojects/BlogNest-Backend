@@ -20,7 +20,7 @@ router.get("/search",searchBlogs)
 router.get("/", getPosts);
 
 // Get my posts
-router.get("/myposts", getmyposts);
+router.get("/myposts",jwtAuthMiddleware, getmyposts);
 // Get a post by ID
 router.get("/:id", getPostById);
 // Update a post by ID  
