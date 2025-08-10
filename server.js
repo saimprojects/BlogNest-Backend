@@ -28,7 +28,15 @@ app.use('/api/admin',adminRoutes)
 
 
 
-mongoose.connect(process.env.MONGO_URL).then(()=> console.log("Mongodb is connected"))
+mongoose.connect(process.env.MONGO_URL, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  tls: true, // ensure TLS is used
+  // agar testing mein koi SSL error aaye to ye temporarily add kar sakte hain (production mein hata dein)
+  // tlsAllowInvalidCertificates: true 
+})
+.then(() => console.log('MongoDB connected successfully'))
+.catch((err) => console.log('MongoDB connection error:', err));
 app.listen(PORT, () => {
     console.log(` Server is running on port ${PORT}`);
 });
