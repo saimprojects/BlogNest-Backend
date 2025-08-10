@@ -14,9 +14,20 @@ const PORT = process.env.PORT || 3000;
 
 app.use("/uploads", express.static("uploads"));
 
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://blog-nest-frontend-pi.vercel.app"
+];
+
 app.use(cors({
-  origin: "https://blog-nest-frontend-pi.vercel.app",  
-  credentials: true                 
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("CORS not allowed for this origin"));
+    }
+  },
+  credentials: true,
 }));
 app.use(cookieParser());
 app.use(express.json());

@@ -88,12 +88,12 @@ const loginUser = async (req, res) => {
     const token = generateToken(payload);
 
     // Set the token in a cookie before sending the response
-    res.cookie("token", token, {
-      httpOnly: true,
-      secure: false, // 🔒 set to true in production with HTTPS
-      sameSite: "lax",
-      maxAge: 60 * 60 * 1000,
-    });
+   res.cookie("token", token, {
+  httpOnly: true,       // ✅ prevent JS access
+  secure: true,         // ✅ only over HTTPS
+  sameSite: "None",     // ✅ allow cross-site requests
+  maxAge: 7 * 24 * 60 * 60 * 1000, // optional: 7 days
+});
 
     // ✅ Send response after cookie
     res.status(200).json({
