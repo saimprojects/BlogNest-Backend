@@ -14,6 +14,7 @@ const PORT = process.env.PORT || 3000;
 
 app.use("/uploads", express.static("uploads"));
 
+//cors 
 const allowedOrigins = [
   "http://localhost:5173",
   "https://blog-nest-frontend-pi.vercel.app"
