@@ -252,7 +252,7 @@ const forgotPassword = async (req, res) => {
     });
 
     const resetLink = `http://localhost:5173/new-password/${token}`;
-     console.log("🔗 Reset Link:", resetLink); // ✅ Console reset link
+    
 
    await sendEmail(
   user.email,
@@ -277,7 +277,6 @@ const forgotPassword = async (req, res) => {
       .status(200)
       .json({ message: "Password reset link sent to email", success: true });
   } catch (err) {
-    console.error("❌ forgotPassword error:", err); // Add this!
     res.status(500).json({ message: "server error", success: false });
   }
 };
@@ -288,7 +287,7 @@ async function resetPassword(req, res) {
     const { newPassword } = req.body;
 
     const decoded = jwt.verify(token, process.env.JWT_SECRET, );
-    console.log("🔑 Decoded Token:", decoded);
+    
     const userId = decoded._id;
 
     const user = await User.findById(userId);
