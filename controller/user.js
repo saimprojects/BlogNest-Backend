@@ -251,7 +251,7 @@ const forgotPassword = async (req, res) => {
       email: user.email,
     });
 
-    const resetLink = `http://localhost:5173/new-password/${token}`;
+    const resetLink = `https://blog-nest-frontend-pi.vercel.app/new-password/${token}`;
     
 
    await sendEmail(
